@@ -1,0 +1,8 @@
+<h2>Mis pedidos</h2>
+<a href="/crear/">Nuevo pedido</a>
+
+<ul>
+{% for pedido in pedidos %}
+    <li>{{ pedido.producto }} - {{ pedido.direccion }}</li>
+{% endfor %}
+</ul>

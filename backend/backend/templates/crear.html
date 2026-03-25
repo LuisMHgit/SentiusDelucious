@@ -1,0 +1,7 @@
+<h2>Nuevo pedido</h2>
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="producto" placeholder="Producto">
+    <input type="text" name="direccion" placeholder="Dirección">
+    <button type="submit">Crear</button>
+</form>
