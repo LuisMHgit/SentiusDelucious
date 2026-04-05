@@ -23,10 +23,13 @@ python manage.py runserver
 - Login de usuario
 - Crear pedidos
 - Listar pedidos
-
-## Funcionalidades pendientes
 - Editar pedidos
 - Eliminar pedidos
+- Buscador de pedidos
+
+## Funcionalidades pendientes
+- Mejora Visual
+- Reservas
 
 ## Autor
 Luis - 2º DAM

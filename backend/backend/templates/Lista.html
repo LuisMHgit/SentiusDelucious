@@ -1,8 +1,19 @@
 <h2>Mis pedidos</h2>
-<a href="/crear/">Nuevo pedido</a>
+
+<form method="get">
+    <input type="text" name="q" placeholder="Buscar producto">
+    <button type="submit">Buscar</button>
+</form>
+
+<a href="{% url 'crear_pedido' %}">Nuevo pedido</a>
 
 <ul>
 {% for pedido in pedidos %}
-    <li>{{ pedido.producto }} - {{ pedido.direccion }}</li>
+    <li>
+        {{ pedido.producto }} - {{ pedido.direccion }} ({{ pedido.fecha }})
+
+        <a href="{% url 'editar_pedido' pedido.id %}">Editar</a>
+        <a href="{% url 'eliminar_pedido' pedido.id %}">Eliminar</a>
+    </li>
 {% endfor %}
 </ul>
