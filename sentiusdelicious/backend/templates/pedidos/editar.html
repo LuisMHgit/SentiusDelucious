@@ -1,0 +1,8 @@
+<h2>Editar pedido</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="producto" value="{{ pedido.producto }}" required>
+    <input type="text" name="direccion" value="{{ pedido.direccion }}" required>
+    <button type="submit">Guardar</button>
+</form>

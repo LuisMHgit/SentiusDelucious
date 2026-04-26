@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Crear pedido</h2>
+
+<form method="post">
+    {% csrf_token %}
+
+    <div class="mb-3">
+        <label class="form-label">Producto</label>
+        <input type="text" name="producto" class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Dirección</label>
+        <input type="text" name="direccion" class="form-control">
+    </div>
+
+    <button type="submit" class="btn btn-success">Guardar</button>
+</form>
+{% endblock %}

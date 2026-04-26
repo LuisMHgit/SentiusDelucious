@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Mis pedidos</h2>
+
+<div class="d-flex justify-content-between mb-3">
+    <a href="{% url 'crear_pedido' %}" class="btn btn-primary">+ Nuevo pedido</a>
+
+    <form method="get" class="d-flex">
+        <input type="text" name="q" class="form-control me-2" placeholder="Buscar...">
+        <button class="btn btn-outline-secondary">Buscar</button>
+    </form>
+</div>
+
+<table class="table table-hover shadow-sm">
+    <thead class="table-dark">
+        <tr>
+            <th>Producto</th>
+            <th>Dirección</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pedido in pedidos %}
+        <tr>
+            <td>{{ pedido.producto }}</td>
+            <td>{{ pedido.direccion }}</td>
+            <td>
+                <a href="{% url 'editar_pedido' pedido.id %}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="{% url 'eliminar_pedido' pedido.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3" class="text-center">No hay pedidos</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
