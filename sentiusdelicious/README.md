@@ -15,6 +15,7 @@ Aplicación web desarrollada con Django que permite a los usuarios gestionar ped
 ## Instalación
 python -m pip install --upgrade pip
 python -m pip install django psycopg2-binary
+python-dotenv
 
 ## Ejecución
 
@@ -25,7 +26,6 @@ python manage.py createsuperuser
 python manage.py runserver
 
 ## Configuracion
-(posibles cambios en el futuro)
 DB_NAME=sentiusdelicious_db
 DB_USER=postgres
 DB_PASSWORD=postgres
@@ -46,7 +46,7 @@ DB_PORT=5432
 
 ## Funcionalidades pendientes
 - Mejora Visual
-- Pasar a PostgreSQL
+- Repartidor
 
 ##  Problemas conocidos
 - Posibles errores si fechas no tienen formato correcto

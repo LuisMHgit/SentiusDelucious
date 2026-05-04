@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Mis reservas</h2>
+
+<a href="{% url 'crear_reserva' %}" class="btn btn-success mb-3">+ Nueva reserva</a>
+
+<div class="row">
+    {% for reserva in reservas %}
+    <div class="col-md-4">
+        <div class="card mb-3 shadow-sm">
+            <div class="card-body">
+                <h5>Mesa {{ reserva.mesa_id }}</h5>
+                <p>{{ reserva.numero_personas }} personas</p>
+                <p>{{ reserva.fecha_reserva }}</p>
+
+                <span class="badge bg-{% if reserva.estado == 'confirmada' %}success{% elif reserva.estado == 'cancelada' %}danger{% else %}warning{% endif %}">
+                    {{ reserva.estado }}
+                </span>
+
+                <div class="mt-3">
+                    <a href="{% url 'editar_reserva' reserva.id %}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="{% url 'eliminar_reserva' reserva.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

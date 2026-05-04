@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mb-4">Panel principal</h2>
+
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body text-center">
+                <h4>📦 Pedidos</h4>
+                <p>Gestiona tus pedidos fácilmente</p>
+                <a href="{% url 'lista_pedidos' %}" class="btn btn-primary">Ver pedidos</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body text-center">
+                <h4>🍽️ Reservas</h4>
+                <p>Administra tus reservas</p>
+                <a href="{% url 'lista_reservas' %}" class="btn btn-success">Ver reservas</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

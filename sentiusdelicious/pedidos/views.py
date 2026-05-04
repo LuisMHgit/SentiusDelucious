@@ -1,9 +1,10 @@
 # Create your views here.
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-
-from backend.pedidos.forms import ReservaForm
+from .forms import PedidoForm
+from .forms import ReservaForm
 from .models import Pedido
+from .models import Reserva
 
 
 @login_required
@@ -30,12 +31,11 @@ def crear_pedido(request):
     Crea un nuevo pedido asociado al usuario autenticado.
     """
     if request.method == 'POST':
-        # Crear pedido con datos del formulario
-        Pedido.objects.create(
-            usuario=request.user,
-            producto=request.POST.get('producto'),
-            direccion=request.POST.get('direccion')
-        )
+        form = PedidoForm(request.POST)
+        if form.is_valid():
+            pedido = form.save(commit=False)
+            pedido.usuario = request.user
+            pedido.save()
         return redirect('lista_pedidos')  # Mejor usar nombre de ruta
 
     return render(request, 'crear.html')
@@ -53,10 +53,10 @@ def editar_pedido(request, pedido_id):
         usuario=request.user  # Seguridad: evita acceder a pedidos de otros usuarios
     )
 
-    if request.method == 'POST':
-        # Actualizar campos del pedido
-        pedido.producto = request.POST.get('producto')
-        pedido.direccion = request.POST.get('direccion')
+    form = PedidoForm(request.POST)
+    if form.is_valid():
+        pedido = form.save(commit=False)
+        pedido.usuario = request.user
         pedido.save()
 
         return redirect('lista_pedidos')
@@ -110,15 +110,14 @@ def editar_reserva(request, reserva_id):
     )
 
     if request.method == 'POST':
-        reserva.mesa_id = request.POST.get('mesa_id')
-        reserva.fecha_reserva = request.POST.get('fecha_reserva')
-        reserva.numero_personas = request.POST.get('numero_personas')
-        reserva.estado = request.POST.get('estado')
-        reserva.save()
+        form = ReservaForm(request.POST, instance=reserva)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_reservas')
+    else:
+        form = ReservaForm(instance=reserva)
 
-        return redirect('lista_reservas')
-
-    return render(request, 'reservas/editar_reserva.html', {'reserva': reserva})
+    return render(request, 'reservas/editar_reserva.html', {'form': form})
 
 
 @login_required
